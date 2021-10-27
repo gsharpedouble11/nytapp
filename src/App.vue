@@ -28,10 +28,16 @@
         v-show="postsLoading">
           Loading...
       </div>
-      <button v-on:click="morePosts">Load more posts</button>
+      <button type="button" class="btn btn-secondary btn-lg btn-block" id="more-posts" v-on:click="morePosts">Load more posts</button>
     </div>
   </div>
 </template>
+
+<style scoped>
+#more-posts {
+  margin-bottom: 3rem;
+}
+</style>
 
 <script>
 import axios from 'axios'
@@ -75,6 +81,12 @@ export default {
     morePosts () {
       if (this.nextPage != null) {
         this.getPosts(this.nextPage)
+      }
+
+      if (this.postsLoading === true) {
+        document.getElementById('more-posts').style.display = 'none'
+      } else {
+        document.getElementById('more-posts').style.display = 'block'
       }
     }
   }
