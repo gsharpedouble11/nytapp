@@ -28,6 +28,7 @@
         v-show="postsLoading">
           Loading...
       </div>
+      <button v-on:click="morePosts">Load more posts</button>
     </div>
   </div>
 </template>
@@ -38,8 +39,6 @@ import axios from 'axios'
 export default {
   created () {
     this.getPosts()
-
-    window.addEventListener('scroll', this.handleScroll)
   },
 
   data () {
@@ -73,11 +72,9 @@ export default {
         })
     },
 
-    handleScroll () {
-      if (document.body.scrollHeight - window.innerHeight - document.body.scrollTop <= 5) {
-        if (this.nextPage != null) {
-          this.getPosts(this.nextPage)
-        }
+    morePosts () {
+      if (this.nextPage != null) {
+        this.getPosts(this.nextPage)
       }
     }
   }
